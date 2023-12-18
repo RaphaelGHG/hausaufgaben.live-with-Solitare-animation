@@ -32,7 +32,8 @@ function handleLogoClick() {
   clickCount.value += 1;
 
   if (clickCount.value === 5) {
-    window.location.href = 'src/components/solitare.animation/index_solitare.html';
+    // Rufe die solitaireVictory-Funktion mit dem CSS-Selektor auf
+    $('rounded-3 img-fluid').solitaireVictory();
   }
 }
 </script>
