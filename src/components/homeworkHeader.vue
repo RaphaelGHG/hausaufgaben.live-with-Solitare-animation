@@ -29,12 +29,9 @@ function reload() {
 }
 
 function handleLogoClick() {
-  // Erhöhe den Klickzähler
   clickCount.value += 1;
 
-  // Überprüfe, ob der Zähler eine bestimmte Anzahl erreicht hat
   if (clickCount.value === 5) {
-    // Führe hier die gewünschte Aktion aus, z.B., leite auf eine andere Seite um
     window.location.href = 'src/components/solitare.animation/index_solitare.html';
   }
 }
