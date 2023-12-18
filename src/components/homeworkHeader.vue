@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import Sidebar from '@/components/sidebarComponent.vue'
+import { ref, defineProps, defineEmits } from 'vue'
 
-import { ref } from 'vue'
-
-const emit = defineEmits(['reload'])
+const  emit  = defineEmits(['reload'])
 
 const props = defineProps({
-  title: {
+  headerTitle: {
     type: String,
     required: true
   },
-  button: {
+  showButton: {
     type: Boolean,
     required: false,
     default: true
@@ -18,10 +17,26 @@ const props = defineProps({
 })
 
 const sidebarVisible = ref(false)
+const clickCount = ref(0)
+
+function toggleSidebar() {
+  sidebarVisible.value = !sidebarVisible.value
+}
 
 function reload() {
-  sidebarVisible.value = false
+  toggleSidebar()
   emit('reload')
+}
+
+function handleLogoClick() {
+  // Erhöhe den Klickzähler
+  clickCount.value += 1;
+
+  // Überprüfe, ob der Zähler eine bestimmte Anzahl erreicht hat
+  if (clickCount.value === 5) {
+    // Führe hier die gewünschte Aktion aus, z.B., leite auf eine andere Seite um
+    window.location.href = 'src/components/solitare.animation/index_solitare.html';
+  }
 }
 </script>
 
@@ -34,26 +49,28 @@ function reload() {
           alt="logo"
           class="rounded-3 img-fluid"
           width="80"
+          style="cursor: pointer;"
+          @click="handleLogoClick"
         />
       </router-link>
     </div>
     <div class="p-2 flex-lg-grow-1">
-      <h1>{{ props.title }}</h1>
+      <h1>{{ props.headerTitle }}</h1>
     </div>
-    <div v-if="props.button" class="p-2 col-sm-2">
+    <div v-if="props.showButton" class="p-2 col-sm-2">
       <button class="btn btn-success btn-lg">
         <router-link to="/new">Hausaufgabe erstellen</router-link>
       </button>
     </div>
 
     <div class="p-2 me-1">
-      <i class="bi bi-list icon" @click="sidebarVisible = !sidebarVisible"></i>
+      <i class="bi bi-list icon" @click="toggleSidebar"></i>
     </div>
   </header>
 
   <Sidebar
     :visible="sidebarVisible"
-    @toggle="sidebarVisible = !sidebarVisible"
+    @toggle="toggleSidebar"
     @reload="reload"
   ></Sidebar>
 </template>
