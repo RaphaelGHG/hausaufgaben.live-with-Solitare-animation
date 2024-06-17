@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solitaire Shuffle Animation</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Vollständige Bildschirmhöhe */
+    background-color: #3d3d3d; /* Dunkler Hintergrund */
+  }
+
+  .solitaire-container {
+    position: relative;
+    width: 500px;
+    height: 250px;
+    background-color: #007bff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .card {
+    width: 80px;
+    height: 120px;
+    background-color: #fff;
+    border: 1px solid #333;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease-in-out;
+  }
+</style>
+</head>
+<body>
+  <div class="solitaire-container" id="solitaireContainer">
+    <!-- Cards will be dynamically added here -->
+  </div>
+
+  <script>
+    // Anzahl der Karten, die du anzeigen möchtest
+    const numCards = 52;
+    
+    // Erstelle und positioniere Karten in zufälligen Positionen
+    const container = document.getElementById('solitaireContainer');
+    for (let i = 0; i < numCards; i++) {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.style.top = `${Math.random() * 200}px`;
+      card.style.left = `${Math.random() * 400}px`;
+      container.appendChild(card);
+    }
+
+    // Animiere die Karten, indem du ihre Positionen zufällig änderst
+    setTimeout(() => {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.style.top = `${Math.random() * 200}px`;
+        card.style.left = `${Math.random() * 400}px`;
+      });
+    }, 500);
+
+    // Verzögert die Bewegung, um einen Eindruck des Mischens zu erwecken
+    setTimeout(() => {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.style.transitionDuration = '1s';
+        card.style.top = `${Math.random() * 200}px`;
+        card.style.left = `${Math.random() * 400}px`;
+      });
+    }, 1000);
+  </script>
+</body>
+</html>
