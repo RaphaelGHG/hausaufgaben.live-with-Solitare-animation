@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solitaire Gewinnanimation</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        text-align: center;
+        padding: 50px;
+    }
+    .cards {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+    .card {
+        position: absolute;
+        width: 80px;
+        height: 120px;
+        background-color: #3498db;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        transform-origin: bottom center;
+    }
+    .message {
+        font-size: 24px;
+        margin-top: 30px;
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <h1>Solitaire Gewinnanimation</h1>
+    
+    <div class="cards">
+        <div class="card" style="bottom: 0px;"></div>
+        <div class="card" style="bottom: 0px;"></div>
+        <div class="card" style="bottom: 0px;"></div>
+        <div class="card" style="bottom: 0px;"></div>
+        <div class="card" style="bottom: 0px;"></div>
+    </div>
+
+    <div class="message" id="winMessage">
+        Glückwunsch! Sie haben das Spiel gewonnen.
+    </div>
+
+    <script>
+        // Animation der Gewinnanimation
+        function playWinAnimation() {
+            let cards = document.querySelectorAll('.card');
+            let winMessage = document.getElementById('winMessage');
+            
+            // Kartenbewegung und Stapeln
+            cards.forEach((card, index) => {
+                card.style.transition = 'bottom 1s ease-in-out';
+                card.style.bottom = '200px'; // Karten nach oben bewegen
+                card.style.left = (index * 20) + 'px'; // Versatz für gestapelte Karten
+            });
+
+            // Nachricht einblenden nachdem die Animation beendet ist
+            setTimeout(() => {
+                winMessage.style.display = 'block';
+            }, 1000); // Anpassen der Verzögerung entsprechend der Animationsdauer
+        }
+
+        // Starten der Animation nach dem Laden der Seite
+        window.onload = function() {
+            playWinAnimation();
+        };
+    </script>
+</body>
+</html>
